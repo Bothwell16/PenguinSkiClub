@@ -16,7 +16,7 @@ namespace PenguinComparison.Controllers
 
         public ActionResult About()
         {
-            //TODO : update about boxwith my info
+            //TODO : update about box with my contact info
             ViewBag.Message = "Your application description page.";
 
             return View();
