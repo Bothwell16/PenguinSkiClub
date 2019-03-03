@@ -1,0 +1,36 @@
+﻿@model PenguinComparison.Models.Compare
+@{
+    ViewBag.Title = "Compare";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Compare</h2>
+
+<div>
+    @using (Html.BeginForm("Submit", "Home", FormMethod.Post))
+    {   
+        <div>
+            <label asp-for="Number of Adults">Number of Adults</label>
+            @Html.TextBoxFor(m => m.NumAdults)
+        </div>
+        <div>
+            <label asp-for="Number of Students">Number of Students</label>
+            @Html.TextBoxFor(m => m.NumStudents)
+        </div>
+        <div>
+            <label asp-for="Number of Children">Number of Children</label>
+            @Html.TextBoxFor(m => m.NumChildren)
+        </div>
+        <div>
+            <label asp-for="Number of vacation nights">Number of vacation nights</label>
+            @Html.TextBoxFor(m => m.NumVacationNights )
+        </div>
+        <div>
+            <label asp-for="Number of Students">Number of weekend nights</label>
+            @Html.TextBoxFor(m => m.NumWeekendNights )
+        </div>
+         <div>
+            <input type="submit" />
+        </div>
+    }
+</div>
