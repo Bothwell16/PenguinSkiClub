@@ -38,6 +38,7 @@ namespace PenguinComparison.Models
             this.guestInfo = r;
 
             this.member = asMember;
+            this.personCount = personCount = r.personCount();
             CalcAverageCostPerPersonPerNight();
         }
 
@@ -53,7 +54,7 @@ namespace PenguinComparison.Models
         {
             if (this.member)
             {
-                this.averagePricePerPersonPerNight = this.AnnualMembershipCost() / (double)this.personCount;
+                this.averagePricePerPersonPerNight = (this.AnnualMembershipCost()/(this.guestInfo.NumVacationNights+this.guestInfo.NumWeekendNights)) / (double)this.personCount;
             }
             else
             {

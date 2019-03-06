@@ -12,6 +12,13 @@ namespace PenguinComparison.Models
         public int NumChildren { get; set; }
         public int NumVacationNights { get; set; }
         public int NumWeekendNights { get; set; }
-        public double CostPerPerson { get; set; }   
+        public double CostPerPerson { get; set; }
+
+        internal int personCount()
+        {
+            return (this.NumAdults +
+                    this.NumStudents +
+                    this.NumChildren);
+        }
     }
 }
