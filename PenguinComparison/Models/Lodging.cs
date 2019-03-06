@@ -7,44 +7,73 @@ namespace PenguinComparison.Models
 {
     public class Lodging
     {
- /*       public int NumAdults { get; set; }
-        public int NumStudents { get; set; }
-        public int NumChildren { get; set; }
-        public int NumVacationNights { get; set; }
-        public int NumWeekendNights { get; set; }
-        public double CostPerPerson { get; set; }
-*/
-        private string name;
+
+        public string name;
         public Compare guestInfo;
+
+        public int adultRate { get; private set; }
+        public int teenRate { get; private set; }
+        public int childRate { get; private set; }
+        public int membershipDues { get; private set; }
+        public int personCount { get; private set; }
+        public int priceQuoted { get; private set; }
+        public double quotedPrice { get; private set; }
+        public double averagePricePerPersonPerNight { get; private set; }
+        public bool member { get; private set; }
+        public int annualCost { get; private set; }
 
         public Lodging(string name)
         {
             this.name = name;
+            this.adultRate = 0;
+            this.teenRate = 0;
+            this.childRate = 0;
+            this.membershipDues = 0;
         }
-        internal void LoadReservation(Compare r)
+        internal void LoadReservation(Compare r, bool asMember)
         {
             //TODO : create a seasonal Lodging flag for penguin
             //       that gets set if the data was loaded
 
             this.guestInfo = r;
+
+            this.member = asMember;
+            CalcAverageCostPerPersonPerNight();
         }
 
-        internal void LoadMemberRates(int v1, int v2, int v3, int v4)
+        internal void LoadMemberRates(int adultRate, int teenRate, int childRate, int membershipDues)
         {
-            //TODO : create a seasonal Lodging flag for penguin
-            //       that gets set if the data was loaded
-
-            //throw new NotImplementedException();
+            this.adultRate = adultRate;
+            this.teenRate = teenRate;
+            this.childRate = childRate;
+            this.membershipDues = membershipDues;
         }
 
-        internal void LoadGuestRates(int v1, int v2)
+        internal void CalcAverageCostPerPersonPerNight()
         {
-            //throw new NotImplementedException();
+            if (this.member)
+            {
+                this.averagePricePerPersonPerNight = this.AnnualMembershipCost() / (double)this.personCount;
+            }
+            else
+            {
+                this.averagePricePerPersonPerNight = this.quotedPrice / this.personCount;
+            }
         }
 
-        internal void LoadGuestRates(int v1, double v2)
+        private double AnnualMembershipCost()
         {
-            //throw new NotImplementedException();
+            return
+                (this.adultRate * this.guestInfo.NumAdults) +
+                (this.teenRate * this.guestInfo.NumStudents) +
+                (this.childRate * this.guestInfo.NumChildren);
+
+        }
+
+        internal void LoadGuestRates(int personCount, double quotedPrice)
+        {
+            this.personCount = personCount;
+            this.quotedPrice = quotedPrice;
         }
     }
 }

@@ -37,4 +37,20 @@ calculate estimated costs:
             <td>@d.guestInfo.NumWeekendNights</td>
         </tr>
     }
-</table>  
+</table> 
+
+<div><b>Table Format Data Displaying in ForEach</b><br /></div>
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>Name </th>
+        <th>Price per Person per Night </th>
+    </tr>
+    @foreach (var d in Model)
+    {
+        <tr>
+            <td>@d.name</td>
+            <td>@d.averagePricePerPersonPerNight</td>
+        </tr>
+    }
+</table> 
+ 

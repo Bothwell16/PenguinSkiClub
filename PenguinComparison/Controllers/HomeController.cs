@@ -29,17 +29,13 @@ namespace PenguinComparison.Controllers
         }
         [HttpPost]
         public ActionResult Submit(Compare model)
-        {
-            //todo : replace this code with the commented out block
-            //model.CostPerPerson = 12.50;
-            //return View(model);
-            
+        {            
              // create the list of accomodations. 
 
             List<Lodging> LodgingList = new List<Lodging>();
             LodgingList.Add(new Lodging("Penguin"));
             LodgingList[0].LoadMemberRates(475, 150, 125, 400);
-            LodgingList[0].LoadReservation(model);
+            LodgingList[0].LoadReservation(model, true);
             //TODO : thePenguin.LoadGuestRates();
 
             //TODO : pass in typical cost for 4 person 2 night stay
@@ -48,13 +44,13 @@ namespace PenguinComparison.Controllers
             //      inquiries.
             LodgingList.Add(new Lodging("Woodstock"));
             LodgingList[1].LoadGuestRates(4,236);
-            LodgingList[1].LoadReservation(model);
+            LodgingList[1].LoadReservation(model, false);
             LodgingList.Add(new Lodging("Pollard Brook"));
             LodgingList[2].LoadGuestRates(4, 273.50);
-            LodgingList[2].LoadReservation(model);
+            LodgingList[2].LoadReservation(model, false);
             LodgingList.Add(new Lodging("Mountain Club"));
             LodgingList[3].LoadGuestRates(4, 541.50);
-            LodgingList[3].LoadReservation(model);
+            LodgingList[3].LoadReservation(model, false);
 
             return View(LodgingList);
         }
