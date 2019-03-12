@@ -53,4 +53,44 @@ calculate estimated costs:
         </tr>
     }
 </table> 
+
+<div><b>Table Format Data Displaying in ForEach</b><br /></div>
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <td>OTHER LODGING</td>
+        @foreach (var d in Model)
+        {
+
+            <td>@d.name</td>
+        }
+    </tr>
+    <tr>
+        <td>Weekend Stay 2 nights (includes taxes)</td>
+        @foreach (var d in Model)
+        {
+            <td>@d.perStayCost(2)</td>
+        }
+    </tr>
+    <tr>
+        <td>Per night cost</td>
+        @foreach (var d in Model)
+        {
+            <td>@d.perNightCost.ToString("C2")</td>
+        }
+    </tr>
+    <tr>
+        <td>Per night per person cost</td>
+        @foreach (var d in Model)
+        {
+            <td>@d.averagePricePerPersonPerNight.ToString("C2")</td>
+        }
+    </tr>
+    <tr>
+        <td>Weekend Stay vs Penguin Season</td>
+        @foreach (var d in Model)
+        {
+            <td>@d.averagePricePerPersonPerNight.ToString("C2")</td>
+        }
+    </tr>
+</table> 
  

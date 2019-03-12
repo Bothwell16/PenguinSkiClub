@@ -19,6 +19,9 @@ namespace PenguinComparison.Models
         public int priceQuoted { get; private set; }
         public double quotedPrice { get; private set; }
         public double averagePricePerPersonPerNight { get; private set; }
+
+        public decimal perNightCost { get; private set; }
+
         public bool member { get; private set; }
         public int annualCost { get; private set; }
 
@@ -39,6 +42,7 @@ namespace PenguinComparison.Models
 
             this.member = asMember;
             this.personCount = personCount = r.personCount();
+            CalcAverageCostPerNight();
             CalcAverageCostPerPersonPerNight();
         }
 
@@ -52,6 +56,7 @@ namespace PenguinComparison.Models
 
         internal void CalcAverageCostPerPersonPerNight()
         {
+
             if (this.member)
             {
                 this.averagePricePerPersonPerNight = (this.AnnualMembershipCost()/(this.guestInfo.NumVacationNights+this.guestInfo.NumWeekendNights)) / (double)this.personCount;
@@ -60,6 +65,25 @@ namespace PenguinComparison.Models
             {
                 this.averagePricePerPersonPerNight = this.quotedPrice / this.personCount;
             }
+        }
+
+        internal void CalcAverageCostPerNight()
+        {
+            if (this.member)
+            {
+                this.perNightCost = (decimal)(this.AnnualMembershipCost() / (this.guestInfo.NumVacationNights + this.guestInfo.NumWeekendNights)) ;
+            }
+            else
+            {
+                this.perNightCost = (decimal)this.quotedPrice;
+            }
+        }
+        
+        public string perStayCost(int numberOfNights)
+        {
+            CalcAverageCostPerNight();
+            decimal psc = perNightCost * numberOfNights;
+            return psc.ToString("C2");
         }
 
         private double AnnualMembershipCost()
